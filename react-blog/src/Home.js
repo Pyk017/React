@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
@@ -34,12 +34,19 @@ const Home = () => {
       body: "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
     },
   ];
+
   const [blogs, setBlogs] = useState(BLOGS);
+
+  const [name, setName] = useState("Prakhar's Blog");
 
   const handleDeleteBlog = (id) => {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
   };
+
+  useEffect(() => {
+    console.log("use effect ran");
+  }, []);
 
   return (
     <div className="home">
@@ -49,6 +56,10 @@ const Home = () => {
         title="All Blogs"
         handleDeleteBlog={handleDeleteBlog}
       />
+      <button onClick={() => setName("Yush's Blog")}>
+        Change your Blog Name
+      </button>
+      <p>{name}</p>
     </div>
   );
 };
