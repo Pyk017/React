@@ -1,6 +1,7 @@
 // javascript for create.html
 
 const form = document.querySelector("form");
+const backBtn = document.querySelector(".back");
 
 const createPost = async (e) => {
   e.preventDefault();
@@ -19,5 +20,9 @@ const createPost = async (e) => {
 
   window.location.replace("./index.html");
 };
+
+backBtn.addEventListener("click", () => {
+  window.location.replace("/");
+});
 
 form.addEventListener("submit", createPost);
