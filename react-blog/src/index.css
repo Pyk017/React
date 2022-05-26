@@ -65,3 +65,53 @@
   margin-top: 10px;
   color: #920000;
 }
+
+.blog-preview a {
+  text-decoration: none;
+}
+
+/* Blog Details Page */
+
+.blog-details h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 10px;
+}
+
+.blog-details div {
+  margin: 20px 0;
+}
+
+.blog-details button {
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.blog-details .deleteBtn {
+  background: #f1356d;
+}
+
+.blog-details .backBtn {
+  background: rgb(101, 169, 224);
+}
+
+.blog-details .backBtn a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.blog-details .deleteBtn:hover {
+  background: #ec0b4f;
+}
+
+.blog-details .backBtn:hover {
+  background: rgb(34, 138, 223);
+}
+
+.blog-details p {
+  margin-top: 5px;
+}
