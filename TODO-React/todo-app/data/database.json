@@ -1,28 +1,20 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "task_name": "CNN Newsource",
-      "task_description": "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-      "task_date": "27/06/2021",
-      "task_time": "10:02 PM",
-      "task_status": false
-    },
-    {
-      "id": 2,
       "task_name": "GPP",
       "task_description": "In congue. Etiam justo. Etiam pretium iaculis justo.",
       "task_date": "06/08/2021",
       "task_time": "3:05 PM",
-      "task_status": false
+      "task_status": true,
+      "id": 2
     },
     {
-      "id": 3,
       "task_name": "Corporate Branding",
       "task_description": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
       "task_date": "19/09/2021",
       "task_time": "6:44 PM",
-      "task_status": false
+      "task_status": true,
+      "id": 3
     },
     {
       "id": 4,
@@ -41,22 +33,6 @@
       "task_status": false
     },
     {
-      "id": 6,
-      "task_name": "OAM",
-      "task_description": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
-      "task_date": "15/08/2021",
-      "task_time": "11:56 AM",
-      "task_status": true
-    },
-    {
-      "id": 7,
-      "task_name": "Owner-managed businesses",
-      "task_description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
-      "task_date": "18/01/2022",
-      "task_time": "1:12 AM",
-      "task_status": true
-    },
-    {
       "id": 8,
       "task_name": "Python",
       "task_description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
@@ -71,14 +47,6 @@
       "task_date": "20/05/2022",
       "task_time": "11:02 PM",
       "task_status": false
-    },
-    {
-      "id": 10,
-      "task_name": "Eyebrow",
-      "task_description": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
-      "task_date": "20/03/2022",
-      "task_time": "9:31 PM",
-      "task_status": true
     },
     {
       "id": 11,
@@ -105,14 +73,6 @@
       "task_status": false
     },
     {
-      "id": 14,
-      "task_name": "IT Project &amp; Program Management",
-      "task_description": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
-      "task_date": "10/06/2021",
-      "task_time": "6:14 AM",
-      "task_status": true
-    },
-    {
       "id": 15,
       "task_name": "TMG",
       "task_description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
@@ -135,6 +95,38 @@
       "task_date": "24/08/2021",
       "task_time": "3:47 PM",
       "task_status": false
+    },
+    {
+      "id": 6,
+      "task_name": "OAM",
+      "task_description": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+      "task_date": "15/08/2021",
+      "task_time": "11:56 AM",
+      "task_status": true
+    },
+    {
+      "id": 7,
+      "task_name": "Owner-managed businesses",
+      "task_description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+      "task_date": "18/01/2022",
+      "task_time": "1:12 AM",
+      "task_status": true
+    },
+    {
+      "id": 10,
+      "task_name": "Eyebrow",
+      "task_description": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
+      "task_date": "20/03/2022",
+      "task_time": "9:31 PM",
+      "task_status": true
+    },
+    {
+      "id": 14,
+      "task_name": "IT Project &amp; Program Management",
+      "task_description": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
+      "task_date": "10/06/2021",
+      "task_time": "6:14 AM",
+      "task_status": true
     },
     {
       "id": 18,
