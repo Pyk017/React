@@ -1,4 +1,4 @@
-const TaskList = ({ tasks, markAsDone }) => {
+const TaskList = ({ tasks, markAsDone, deleteTask }) => {
   return (
     <div className="todo-comp task-list">
       {tasks
@@ -19,7 +19,10 @@ const TaskList = ({ tasks, markAsDone }) => {
                   <small>Date: {task.task_time + " " + task.task_date}</small>
                 </div>
               </div>
-              <div className="delete-icon"></div>
+              <div
+                className="delete-icon"
+                onClick={() => deleteTask(task.id)}
+              ></div>
             </div>
           );
         })}

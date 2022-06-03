@@ -21,6 +21,74 @@ body {
   flex-direction: column;
 }
 
+/* Alert Messages css starts*/
+
+.alert-message {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-message.failure {
+  font-weight: bold;
+  font-size: large;
+}
+
+.alert-message.failure::after {
+  content: "";
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAChUlEQVRoge2YT2sTQRjGf9Nmd6NFIlHx4EUQPbR48AOIVtFDUD9Bj6LFPwj2JngRBMFiBC9+Bc+CJ8GmQu9SAoIEL7UgDShEoWnavF7aZLvN7szszlbB/Z2WzOy8z5tn5mESKCgoKCj4n1F5LSwLwRUUrwHoq9tqev19HnVyaUCWqNIrfwGpbn/0k75/Wk132q5rjbleEIBe8DQkHuAw4xtP8ijl3AFZ9CcR9QkoRYa2QM6pCxvLLuu5d0BUnb3iAcZBvXRdzmkD0ghuAFcTplySheC6y5rOtpA08WkHy8AZTcUWv7pTqkbXRV13DrSD++jEAwinOBjcdVXWiQMjYlOHs1h148De2NThLFYzOxAXmw/mp/jR8QA4UulRf9iMvuokVrM7EBObXqk/ePa9fnQYHMVqpgaSYtP3ZPAcbiZC5lhN3YA08YHncePhbz3czAgFdXlHkFZHegc0semVhqL9eAcyx2qqBmSJKqhHSXN2O5DQAIDisXw4dDSNlnQOGMRmWLSnayBDrFo3IIv+JHBTNy+8bfxSwhkYLMwtafhnbfXYOxB/29yF8RkYkipWrRowuG0OsDoDQ6xj1bgBXWxGsTwDYUVWsWrugOltc5uwaM/kDOxgGatGd6EUt82sGN9WzRywv21mxThWtQ4k/EhP5Ntambcfj6OAa+e/c+LYus3rYHhb1YsyjM0or96cZHWtDMDX1QM8u/fZdomdWL2cNClxC9nEZpTOb2/ksyXaWI1twDY2o8zUVqhMbFKZ2GSmtpJ2GW2sxp4BaQRzwHz6yg4R5tTF7otRQ0lb6E5OcuwZi9eSz3+j+0h8A8IsitY+ahmNosWWmv3bMgoKCgoK/k3+AILkzValVvu5AAAAAElFTkSuQmCC")
+    no-repeat center;
+  background-size: contain;
+  width: 10em;
+  height: 10em;
+}
+
+.alert-message.info::before {
+  content: "Loading...";
+  position: absolute;
+  top: 10.5em;
+}
+
+.alert-message.info::after {
+  content: "";
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  display: inline-block;
+  width: 5.5rem;
+  height: 4.5rem;
+  color: inherit;
+  vertical-align: middle;
+  pointer-events: none;
+  border: 0.5rem solid gray;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: 1s loader linear infinite;
+  animation: 1s loader linear infinite;
+  position: relative;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Alert Messages css ends */
+
 .navbar {
   width: 80%;
   justify-content: space-between;
@@ -182,8 +250,15 @@ body {
   background-size: contain;
   width: 30px;
   height: 30px;
-  cursor: pointer;
+  pointer-events: none;
   user-select: none;
+  opacity: 0.5;
+}
+
+.completed .delete-icon {
+  pointer-events: all;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .left-side-task {

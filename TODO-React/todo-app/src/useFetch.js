@@ -28,6 +28,7 @@ const useFetch = (url) => {
 
   return {
     tasks,
+    setTask,
     isPending,
     error,
   };
