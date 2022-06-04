@@ -5,7 +5,8 @@
       "task_description": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.",
       "task_date": "19/09/2021",
       "task_time": "6:44 PM",
-      "task_status": false,
+      "task_status": true,
+      "task_completed_time": "2022-06-04T18:26:52.873Z",
       "id": 3
     },
     {
@@ -137,28 +138,21 @@
       "task_status": true
     },
     {
-      "task_name": "Task Testing",
-      "task_description": "Task Description is mandatory here!",
-      "task_date": "09/06/2022",
-      "task_time": "07:30 PM",
-      "task_status": false,
-      "id": 20
-    },
-    {
-      "task_name": "Another Task",
-      "task_description": "Another description of a task",
-      "task_date": "04/06/2022",
-      "task_time": "02:34 PM",
-      "task_status": false,
-      "id": 21
-    },
-    {
       "task_name": "Learning ReactJS",
       "task_description": "React is an important skill to master.",
       "task_date": "04/06/2022",
       "task_time": "02:36 PM",
       "task_status": false,
       "id": 22
+    },
+    {
+      "task_name": "Dummy Task ",
+      "task_description": "This is to check the new key in the database.,",
+      "task_date": "17/06/2022",
+      "task_time": "11:36 PM",
+      "task_status": true,
+      "task_completed_time": "2022-06-04T18:06:59.349Z",
+      "id": 23
     }
   ]
 }

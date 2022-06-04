@@ -28,6 +28,7 @@ const Home = () => {
         task_date: targetTask.task_date,
         task_time: targetTask.task_time,
         task_status: !targetTask.task_status,
+        task_completed_time: new Date(),
       }),
     })
       .then((res) => {

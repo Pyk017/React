@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const TaskList = ({ tasks, markAsDone, deleteTask, keyword }) => {
+  const navigate = useNavigate();
+
   tasks = tasks.filter((task) =>
     task.task_name.toLowerCase().includes(keyword)
   );
@@ -20,7 +24,9 @@ const TaskList = ({ tasks, markAsDone, deleteTask, keyword }) => {
                   onClick={() => markAsDone(task.id)}
                 ></div>
                 <div className="task-name">
-                  <span>{task.task_name}</span>
+                  <span onClick={() => navigate(`/tasks/${task.id}`)}>
+                    {task.task_name}
+                  </span>
                   <small>Date: {task.task_time + " " + task.task_date}</small>
                 </div>
               </div>

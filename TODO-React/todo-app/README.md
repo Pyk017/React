@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Simple TODO - Application with full usage of `Stateless Functional Component`, `useState`, `useEffect`, `Custome hook`, `Router` using `react-router-dom` and many more.
 
 ## Available Scripts
 
