@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 import TaskList from "./TaskList";
 import useFetch from "./useFetch";
 
@@ -7,9 +7,11 @@ const Home = () => {
     "http://localhost:8000/tasks"
   );
 
-  // const deleteTask = (id) => {
-  //   setTask(tasks.filter((task) => task.id !== id));
-  // };
+  const [keyword, setKeyword] = useState("");
+
+  const handleSearch = (e) => {
+    setKeyword(e.target.value.toLowerCase());
+  };
 
   const markAsDone = (id) => {
     let targetTask;
@@ -71,6 +73,7 @@ const Home = () => {
           type="text"
           className="search-list"
           placeholder="Search Task ..."
+          onChange={handleSearch}
         />
         <div className="search-icon"></div>
       </div>
@@ -80,6 +83,7 @@ const Home = () => {
           tasks={tasks}
           markAsDone={markAsDone}
           deleteTask={deleteTask}
+          keyword={keyword}
         />
       )}
       {isPending && <div className="alert-message info"></div>}

@@ -1,7 +1,12 @@
-const TaskList = ({ tasks, markAsDone, deleteTask }) => {
+const TaskList = ({ tasks, markAsDone, deleteTask, keyword }) => {
+  tasks = tasks.filter((task) =>
+    task.task_name.toLowerCase().includes(keyword)
+  );
+
   return (
     <div className="todo-comp task-list">
       {tasks
+        .sort((a, b) => b.id - a.id)
         .sort((a, b) => a.task_status - b.task_status)
         .map((task) => {
           return (

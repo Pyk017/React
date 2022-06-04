@@ -106,6 +106,8 @@ body {
 
 .left-side h2 {
   color: black;
+  cursor: pointer;
+  user-select: none;
 }
 
 .right-side {
@@ -166,7 +168,8 @@ body {
   align-items: center;
 }
 
-.search-list {
+.search-list,
+.task-name-input {
   width: 70%;
   border: none;
   background: transparent;
@@ -174,7 +177,8 @@ body {
   border-bottom: 1px solid gray;
 }
 
-.search-list:focus-visible {
+.search-list:focus-visible,
+.task-name-input:focus-visible {
   outline: none;
   border-bottom: 2px solid gray;
 }
@@ -264,3 +268,69 @@ body {
 .left-side-task {
   width: 100%;
 }
+
+/* Add Task css starts  */
+
+.new-task-container {
+  flex-direction: column;
+  width: 70%;
+}
+
+.new-task-container > div {
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.new-task-container > div > label {
+  padding: 0.3rem 0;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.task-datetime-input {
+  width: 30%;
+  height: 3em;
+  align-items: center;
+  padding-left: 6px;
+  font-size: 1em;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid gray;
+  outline: none;
+}
+
+.save-button {
+  flex-direction: row !important;
+}
+
+.save-button button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background: rgb(82, 223, 69);
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  border-radius: 0.5em;
+  outline: none;
+  border: none;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: all 0.2s ease-in;
+}
+
+.submitBtn:hover {
+  background: rgb(66, 185, 55);
+  margin-top: -3px;
+}
+
+.resetBtn {
+  background: rgb(143, 139, 139) !important;
+}
+
+.resetBtn:hover {
+  background: rgb(77 77 77) !important;
+  margin-top: -3px;
+}
+
+/* Add Task css ends  */
