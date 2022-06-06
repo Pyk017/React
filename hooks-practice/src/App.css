@@ -1,0 +1,40 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  user-select: none;
+}
+
+.App span {
+  font-size: large;
+  font-weight: bold;
+  padding: 0 1rem;
+}
+
+.App button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: larger;
+}
+
+li {
+  cursor: pointer;
+  color: blue;
+}
+
+.backLink {
+  cursor: pointer;
+  margin-top: 10px;
+  font-style: italic;
+  color: blue;
+}
+
+.data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 2rem;
+  flex-direction: column;
+}
