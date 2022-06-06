@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+  user-select: none;
+}
+
+body {
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-main {
+  width: 100%;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.menu a {
+  color: grey;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border-radius: 5px;
+  transition: all 0.1s ease;
+}
+
+.menu a:hover {
+  background-color: #239da1;
+  color: #fff;
+}
+
+.menu {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s linear;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 3.5rem;
+  border-radius: 10px;
+}
+
+.show-menu {
+  height: 10rem;
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
+
+.hamburger-icon {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAA7klEQVR4nO3YsY0CMRCF4WevYBs4QIJG4Eo4SoCU8LITtAHEiIhthAZOQEgPQICEELobGpgNvQj4v3Bs2eMJHDwJAAAAAN5QKFvo/Gx7FsNQwRopG7js972U5yuLp5DXZ4dVf+EtuwNoT3afZraWlCVtTtJ585v6CklSrfEx8oYQ3d2mgSp4fJX+r7dvr14yALOk3TxC8N/kDiCYCkl/SRuqWKzlc69e+gm2xptuZmGoqGa6tir5BI+hnk8Pxdcy6T0AAAB4MuQBXpE8gDyAPIA8gDwAAAAAr408wCuSB5AHkAeQB5AHAAAAAMALuwNe2YcKtCAcSwAAAABJRU5ErkJggg==")
+    no-repeat center;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
