@@ -10,6 +10,8 @@ const Home = () => {
         <li onClick={() => navigate("/counter")}>Counter</li>
         <li onClick={() => navigate("/posts")}>Posts</li>
         <li onClick={() => navigate("/changetheme")}>Change Theme</li>
+        <li onClick={() => navigate("/useref")}>useRef Practice</li>
+        <li onClick={() => navigate("/usecontext")}>useContext Practice</li>
       </ul>
     </div>
   );
