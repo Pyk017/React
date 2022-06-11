@@ -3,6 +3,7 @@ import Counter from "./Counter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Posts from "./Posts";
+import ChangeTheme from "./ChangeTheme";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/counter" element={<Counter />} />
           <Route exact path="/posts" element={<Posts />} />
+          <Route exact path="/changetheme" element={<ChangeTheme />} />
         </Routes>
       </div>
     </Router>

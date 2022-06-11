@@ -38,3 +38,14 @@ li {
   font-size: 2rem;
   flex-direction: column;
 }
+
+.top-header {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.top-header .backLink {
+  width: 100%;
+  text-align: center;
+}
