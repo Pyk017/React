@@ -1,8 +1,8 @@
 const Navbar = () => {
   return (
     <div className="navbar container">
-      <div class="nav-main d-flex">
-        <div class="nav-header">
+      <div className="nav-main d-flex">
+        <div className="nav-header">
           <header>Wandardium-Leviosa</header>
           <div
             className="hamburger-icon"
@@ -11,15 +11,15 @@ const Navbar = () => {
             }
           ></div>
         </div>
-        <ul class="menu show-menu">
+        <ul className="menu">
           <li>
-            <a href="#">Home</a>
+            <a href="/">Number Generator</a>
           </li>
           <li>
-            <a href="#">About</a>
+            <a href="/">Personal Leaderboard</a>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <a href="/">World Country Data</a>
           </li>
         </ul>
       </div>

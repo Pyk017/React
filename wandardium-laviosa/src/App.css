@@ -36,11 +36,14 @@ header {
   font-weight: bold;
 }
 
+.container {
+  max-width: 95vw;
+}
+
 .nav-main {
   width: 100%;
   flex-direction: column;
   background: #fff;
-  border-radius: 10px;
 }
 
 .menu a {
@@ -65,7 +68,6 @@ header {
   background-color: #fff;
   width: 100%;
   margin-top: 3.5rem;
-  border-radius: 10px;
 }
 
 .show-menu {
