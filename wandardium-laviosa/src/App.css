@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: "Nunito Sans", sans-serif;
   user-select: none;
 }
@@ -68,6 +69,7 @@ header {
   background-color: #fff;
   width: 100%;
   margin-top: 3.5rem;
+  z-index: 2;
 }
 
 .show-menu {
@@ -89,4 +91,76 @@ header {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+/* cards design  */
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin: 1rem 0;
+  min-height: 70vh;
+}
+
+.home .card {
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+  min-width: 150px;
+}
+
+.home .card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home .card .card-content {
+  position: absolute;
+  inset: 0;
+  font-size: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home .card img,
+.home .card .card-content {
+  transition: 200ms ease-in-out;
+}
+
+.home .card .card-content h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.home .card .card-content p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.home .card:hover > img.blur {
+  filter: blur(1px);
+}
+
+.home .card:hover > img.zoom {
+  transform: scale(1.1);
+}
+
+.home .card > .card-content.fade {
+  opacity: 0;
+}
+
+.home .card:hover > .card-content.fade {
+  opacity: 1;
 }
