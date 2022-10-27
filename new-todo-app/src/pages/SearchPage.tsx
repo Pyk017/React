@@ -1,0 +1,48 @@
+import { useState } from "react";
+import Heading from "../components/Heading";
+import InputBox from "../components/InputBox";
+import TaskList from "../components/TaskList";
+import Footer from "../components/Footer";
+import NoTask from "../components/NoTask";
+
+const SearchPage = ({ tasks, updateTasks }: any) => {
+  const [searchTask, setSearchTask] = useState(tasks);
+
+  const searchTasks = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    let val: any = event.currentTarget.value.toLowerCase();
+
+    if (val === "") {
+      setSearchTask(tasks);
+      return;
+    }
+
+    setSearchTask(
+      tasks.filter((task: any) => {
+        return task.task_desc.toLowerCase().indexOf(val) !== -1;
+      })
+    );
+  };
+
+  return (
+    <div className="container-box py-3 px-4 bg-white">
+      <div className="container-header">
+        <Heading header={"SEARCH TASKS"} />
+        <InputBox
+          genericFunction={searchTasks}
+          placeholder={"Search Tasks ..."}
+        />
+
+        {Boolean(searchTask.length) && (
+          <TaskList tasks={searchTask} updateTasks={updateTasks} />
+        )}
+
+        {!Boolean(searchTask.length) && (
+          <NoTask message={"No Tasks Available"} />
+        )}
+      </div>
+      <Footer tasks={searchTask} />
+    </div>
+  );
+};
+
+export default SearchPage;
