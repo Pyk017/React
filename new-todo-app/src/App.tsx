@@ -6,6 +6,11 @@ import CompletedTasks from "./pages/CompletedTasks";
 import { v4 as uuidV4 } from "uuid";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/shift-away.css";
+import "tippy.js/animations/scale.css";
+
 function App() {
   const setLocalStorage = (tasks: any) => {
     if (!tasks.length) return;

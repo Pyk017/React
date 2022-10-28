@@ -5,8 +5,15 @@ import TaskList from "../components/TaskList";
 import Footer from "../components/Footer";
 import NoTask from "../components/NoTask";
 
+import SkeletonPage from "../SkeletonPage";
+
 const SearchPage = ({ tasks, updateTasks }: any) => {
   const [searchTask, setSearchTask] = useState(tasks);
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
 
   const searchTasks = (event: React.KeyboardEvent<HTMLInputElement>) => {
     let val: any = event.currentTarget.value.toLowerCase();
@@ -32,11 +39,13 @@ const SearchPage = ({ tasks, updateTasks }: any) => {
           placeholder={"Search Tasks ..."}
         />
 
-        {Boolean(searchTask.length) && (
+        {loading && <SkeletonPage />}
+
+        {!loading && Boolean(searchTask.length) && (
           <TaskList tasks={searchTask} updateTasks={updateTasks} />
         )}
 
-        {!Boolean(searchTask.length) && (
+        {!loading && !Boolean(searchTask.length) && (
           <NoTask message={"No Tasks Available"} />
         )}
       </div>

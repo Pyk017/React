@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ToolTip from "../ToolTip";
 
 const Footer = ({ tasks, page }: any) => {
   const navigate = useNavigate();
@@ -21,10 +22,28 @@ const Footer = ({ tasks, page }: any) => {
     <div className="container-footer d-flex justify-content-between bg-gray align-items-center">
       <div className="left-items d-flex">
         <div className="add-new-task px-3 my-3">
-          <img src="" alt="new task icon" onClick={() => navigate("/all")} />
+          <ToolTip
+            message={`Add Task`}
+            element={
+              <img
+                src=""
+                alt="new task icon"
+                onClick={() => navigate("/all")}
+              />
+            }
+          />
         </div>
         <div className="search px-3 my-3">
-          <img src="" alt="search icon" onClick={() => navigate("/search")} />
+          <ToolTip
+            message={`Search Task`}
+            element={
+              <img
+                src=""
+                alt="search icon"
+                onClick={() => navigate("/search")}
+              />
+            }
+          />
         </div>
         <div className="items-count px-3 my-3">{items}</div>
       </div>
@@ -34,18 +53,36 @@ const Footer = ({ tasks, page }: any) => {
       </div>
 
       <div className="right-items d-flex">
-        <div className={pageAllClasses} onClick={() => navigate("/all")}>
-          All
-        </div>
-        <div className={pageActiveClasses} onClick={() => navigate("/active")}>
-          Active
-        </div>
-        <div
-          className={pageCompletedClasses}
-          onClick={() => navigate("/completed")}
-        >
-          Completed
-        </div>
+        <ToolTip
+          message={`Show All Tasks`}
+          element={
+            <div className={pageAllClasses} onClick={() => navigate("/all")}>
+              All
+            </div>
+          }
+        />
+        <ToolTip
+          message={`Show Active Tasks`}
+          element={
+            <div
+              className={pageActiveClasses}
+              onClick={() => navigate("/active")}
+            >
+              Active
+            </div>
+          }
+        />
+        <ToolTip
+          message={`Show Completed Tasks`}
+          element={
+            <div
+              className={pageCompletedClasses}
+              onClick={() => navigate("/completed")}
+            >
+              Completed
+            </div>
+          }
+        />
       </div>
     </div>
   );
