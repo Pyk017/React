@@ -11,7 +11,7 @@ const CompletedTasks = ({ tasks, updateTasks, deleteTasks }: any) => {
 
   setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 500);
 
   return (
     <div className="container-box py-3 px-4 bg-white">

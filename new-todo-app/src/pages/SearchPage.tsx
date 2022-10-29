@@ -13,7 +13,7 @@ const SearchPage = ({ tasks, updateTasks }: any) => {
 
   setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 500);
 
   const searchTasks = (event: React.KeyboardEvent<HTMLInputElement>) => {
     let val: any = event.currentTarget.value.toLowerCase();

@@ -66,13 +66,17 @@ function App() {
     event: React.MouseEvent<HTMLImageElement>,
     task: any
   ) => {
+    let confirmation = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+
+    if (!confirmation) return;
+
     tasks.forEach((element: any, idx: number) => {
       if (element.id === task.id) {
         tasks.splice(idx, 1);
       }
     });
-
-    alert("Are you sure you want to delete this task?");
 
     if (!tasks.length) localStorage.clear();
 
