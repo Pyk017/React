@@ -6,6 +6,7 @@ import Posts from "./Posts";
 import ChangeTheme from "./ChangeTheme";
 import UseRef from "./UseRef";
 import UseContext from "./UseContext";
+import CustomHook from "./CustomHook";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/changetheme" element={<ChangeTheme />} />
           <Route exact path="/useref" element={<UseRef />} />
           <Route exact path="/usecontext" element={<UseContext />} />
+          <Route exact path="/customhook" element={<CustomHook />} />
         </Routes>
       </div>
     </Router>
