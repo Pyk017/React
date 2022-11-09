@@ -1,5 +1,4 @@
 import { cardType } from "../utils/CardData";
-import { randomGradient } from "../utils/RandomGradients";
 
 const SingleCard = ({
   card,
@@ -13,7 +12,7 @@ const SingleCard = ({
   return (
     <div
       className={`_card ${flipped ? "flipped" : ""}`}
-      style={{ background: randomGradient() }}
+      style={{ background: card.background }}
       onClick={() => handleCardClick(card)}
     >
       <img src={card.src} alt="card front" className="front" />
