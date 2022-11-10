@@ -3,7 +3,11 @@ import { cardType } from "../utils/CardData";
 import SingleCard from "./SingleCard";
 import { useState, useEffect } from "react";
 
-const CardGrid = ({ setTurns }: { setTurns: React.Dispatch<any> }) => {
+const CardGrid = ({
+  setTurns,
+}: {
+  setTurns: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const { cards, changeStatus } = useCardsContext() as CardsContextProps;
   const [choiceOne, setChoiceOne] = useState<cardType | null>(null);
   const [choiceTwo, setChoiceTwo] = useState<cardType | null>(null);
@@ -11,6 +15,9 @@ const CardGrid = ({ setTurns }: { setTurns: React.Dispatch<any> }) => {
 
   const handleCardClick = (card: cardType) => {
     if (disableGrid || card.matched || choiceTwo) return;
+
+    if (card.unique_id === choiceOne?.unique_id) return;
+
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
@@ -33,6 +40,7 @@ const CardGrid = ({ setTurns }: { setTurns: React.Dispatch<any> }) => {
     } else {
       setTimeout(() => resetCards(), 1000);
     }
+    setTurns((prevTurns: number) => prevTurns + 1);
     return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choiceOne, choiceTwo]);
@@ -40,7 +48,6 @@ const CardGrid = ({ setTurns }: { setTurns: React.Dispatch<any> }) => {
   const resetCards = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
-    setTurns((prevTurn: number) => prevTurn + 1);
     setDisableGrid(false);
   };
 

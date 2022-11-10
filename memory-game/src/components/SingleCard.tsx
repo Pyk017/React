@@ -16,7 +16,11 @@ const SingleCard = ({
       onClick={() => handleCardClick(card)}
     >
       <img src={card.src} alt="card front" className="front" />
-      <div className="back"></div>
+      <img
+        className="back"
+        src="/images/question-mark.png"
+        alt="question icon"
+      />
     </div>
   );
 };

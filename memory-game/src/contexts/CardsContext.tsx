@@ -5,6 +5,7 @@ export interface CardsContextProps {
   cards: cardType[];
   changeStatus: (id: string) => void;
   resetCards: () => void;
+  isAllMatched: () => boolean;
 }
 
 export const CardsContext = createContext<CardsContextProps | null>(null);
@@ -29,9 +30,15 @@ const CardsContextProvider = ({ children }: React.PropsWithChildren) => {
     setCards(shuffleCards());
   };
 
+  const isAllMatched = (): boolean => {
+    return cards.every((card: cardType) => card.matched);
+  };
+
   return (
     <CardsContext.Provider
-      value={{ cards, changeStatus, resetCards } as CardsContextProps}
+      value={
+        { cards, changeStatus, resetCards, isAllMatched } as CardsContextProps
+      }
     >
       {children}
     </CardsContext.Provider>

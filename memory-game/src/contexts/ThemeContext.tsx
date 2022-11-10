@@ -21,6 +21,7 @@ export const ThemeContext = createContext<ThemeContextState | null>(null);
 export const ACTIONS = {
   DARK: "dark",
   LIGHT: "light",
+  TOGGLE: "toggle",
 };
 
 function reducer(state: ThemeContextState, type: string) {
@@ -31,6 +32,8 @@ function reducer(state: ThemeContextState, type: string) {
     case ACTIONS.DARK:
       return { ...state, isLightTheme: false };
 
+    case ACTIONS.TOGGLE:
+      return { ...state, isLightTheme: !state.isLightTheme };
     default:
       return state;
   }
@@ -44,7 +47,7 @@ const ThemeContextProvider = ({ children }: React.PropsWithChildren) => {
   const [theme, dispatch] = useReducer(reducer, {
     isLightTheme: true,
     light: { syntax: "#1b1523", bg: "#fff", ui: "#e6e6e6" },
-    dark: { syntax: "#fff", bg: "#1b1523", ui: "#555" },
+    dark: { syntax: "#fff", bg: "#101010", ui: "#555" },
   });
 
   return (
