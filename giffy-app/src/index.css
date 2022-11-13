@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Sono&display=swap");
+
+:root {
+  --theme-color: #f7f7f7;
+  --theme-color-dark: #c8c8c8;
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Sono", sans-serif;
+  background-color: var(--theme-color);
+}
+
+.neumorphic {
+  border-radius: 0.3em;
+  background: var(--theme-color);
+  box-shadow: 7px 7px 14px var(--theme-color-dark), -7px -7px 14px var(--white);
+}
+
+nav {
+  margin: 1em;
+  text-align: center;
+}
+
+.header {
+  padding: 0.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+h1 {
+  width: fit-content;
+  padding: 0.3em 0.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+}
+
+.main-container {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-rows: 1fr;
+  grid-column-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1em;
+  height: 20em;
+}
+
+.main-container > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+img {
+  max-width: 30em;
+  margin-bottom: 1em;
+}
+
+input {
+  margin-bottom: 1em;
+  outline: none;
+  border: 0.05em solid rgba(0, 0, 0, 0.514);
+  text-align: center;
+  max-width: 20em;
+  padding: 0.3em 0;
+  font-size: 1.2em;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  img {
+    min-width: 20em;
+  }
+}
