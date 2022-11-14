@@ -39,6 +39,7 @@ h1 {
   padding: 0.3em 0.5em;
   margin-bottom: 0.5em;
   font-size: 1.2em;
+  text-transform: uppercase;
 }
 
 .main-container {
@@ -46,6 +47,7 @@ h1 {
   /* grid-template-columns: repeat(2, 1fr); */
   grid-template-rows: 1fr;
   grid-column-gap: 1em;
+  grid-row-gap: 1em;
   justify-content: center;
   align-items: center;
   padding: 0 1em;
@@ -74,6 +76,21 @@ input {
   max-width: 20em;
   padding: 0.3em 0;
   font-size: 1.2em;
+}
+
+button {
+  padding: 0.5em 1em;
+  border: 0.05em solid rgba(119, 119, 119, 0.24);
+  border-radius: 0.7em;
+  margin-top: 0.5em;
+  background: rgb(78, 153, 252);
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 7px 7px 14px var(--theme-color-dark), -7px -7px 14px var(--white);
+}
+
+button:hover {
+  background: rgb(0, 77, 177);
 }
 
 @media (min-width: 768px) {

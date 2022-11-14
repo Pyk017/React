@@ -1,18 +1,25 @@
 import useGif from "../useGif";
+import RandomSkeleton from "./Skeleton/RandomSkeleton";
 
 const Random = () => {
-  const { gif, fetchData } = useGif(null);
+  const { gif, isLoading, fetchData } = useGif(null);
 
   const handleClick = () => {
-    fetchData(null);
+    if (fetchData) fetchData(null);
   };
 
   return (
-    <div>
-      <h1 className="neumorphic">Random Gif</h1>
-      <img src={gif} alt="random gif" className="neumorphic" />
-      <button onClick={handleClick}>CLICK FOR NEW </button>
-    </div>
+    <>
+      {isLoading && <RandomSkeleton />}
+
+      {!isLoading && (
+        <div>
+          <h1 className="neumorphic">Random Gif</h1>
+          <img src={gif} alt="random gif" className="neumorphic" />
+          <button onClick={handleClick}>CLICK FOR NEW </button>
+        </div>
+      )}
+    </>
   );
 };
 

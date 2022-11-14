@@ -1,0 +1,77 @@
+:root {
+  --theme-color: #f7f7f7;
+  --theme-color-dark: #c8c8c8;
+  --white: #fff;
+}
+
+.skeleton {
+  /* border: 0.1em solid #777; */
+  border-radius: 0.3em;
+  box-shadow: 7px 7px 25px var(--theme-color-dark), -7px -7px 25px var(--white);
+  margin-bottom: 1em;
+  width: 15em;
+  height: 2em;
+
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    60deg,
+    #f9fafb 0%,
+    #ececed 20%,
+    #f1f5f9 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+}
+
+.skeleton__gif {
+  height: 15em;
+}
+
+.skeleton__input {
+  width: 10em;
+}
+
+.skeleton__button {
+  width: 5em;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .skeleton {
+    width: 20em;
+  }
+  .skeleton__input {
+    width: 15em;
+  }
+
+  .skeleton__button {
+    width: 8em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeleton {
+    width: 30em;
+  }
+  .skeleton__input {
+    width: 20em;
+  }
+
+  .skeleton__button {
+    width: 10em;
+  }
+}
