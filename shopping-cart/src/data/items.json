@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Juice - Orange, 341 Ml",
+    "price": 100.6,
+    "img_url": "/images/juice-orange.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Mustard Prepared",
+    "price": 228.16,
+    "img_url": "/images/mustard-prepared.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Syrup - Pancake",
+    "price": 433.05,
+    "img_url": "/images/syrup-pancake.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Roasted - Potatoes",
+    "price": 350.56,
+    "img_url": "/images/roasted-potatoes.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Glaze - Clear",
+    "price": 346.63,
+    "img_url": "/images/glaze-clear.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Bread - Malt",
+    "price": 181.41,
+    "img_url": "/images/bread-malt.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Spaghetti",
+    "price": 243.5,
+    "img_url": "/images/spaghetti.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Lobster - Base",
+    "price": 174.7,
+    "img_url": "/images/lobster-base.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Appetizer - Crab And Brie",
+    "price": 282.88,
+    "img_url": "/images/appetizer-crab-brie.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Fork - Plastic",
+    "price": 452.55,
+    "img_url": "/images/fork-plastic.jpg"
+  }
+]
