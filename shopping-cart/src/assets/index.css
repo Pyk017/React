@@ -8,3 +8,35 @@ body {
   padding: 0;
   font-family: "Noto Sans JP", sans-serif !important;
 }
+
+.shop-btn {
+  margin-top: 1rem !important;
+  position: absolute !important;
+  top: -0.5rem;
+  right: 1rem;
+}
+
+.filter-container {
+  color: #fff;
+}
+
+@media (min-width: 576px) {
+  .shop-btn {
+    margin-top: 0 !important;
+    position: relative !important;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .filter-container {
+    position: sticky;
+    top: 5rem;
+    z-index: 1000;
+    height: calc(100vh - 6rem);
+    background-color: #f7f7f7;
+    border-right: 1px solid #ececec;
+    color: white;
+  }
+}
