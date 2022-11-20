@@ -18,6 +18,7 @@ body {
 
 .filter-container {
   color: #fff;
+  display: none !important;
 }
 
 @media (min-width: 576px) {
@@ -27,16 +28,27 @@ body {
     top: 0;
     right: 0;
   }
+  .filter-container {
+    display: flex !important;
+  }
+  .filter-btn {
+    display: none !important;
+  }
 }
 
 @media (min-width: 768px) {
   .filter-container {
+    display: flex !important;
     position: sticky;
-    top: 5rem;
+    top: 4rem;
     z-index: 1000;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 4rem);
     background-color: #f7f7f7;
     border-right: 1px solid #ececec;
     color: white;
+  }
+
+  .filter-container .form-check {
+    margin: 2rem 0;
   }
 }
