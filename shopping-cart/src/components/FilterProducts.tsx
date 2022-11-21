@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { blue } from "@mui/material/colors";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
+import Rating from "@mui/material/Rating";
 import { useState } from "react";
 
 type FilterProductsProps = {
@@ -18,6 +19,7 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
   const [includeStock, setIncludeStock] = useState(false);
   const [fastDelivery, setFastDelivery] = useState(false);
+  const [rating, setRating] = useState<number | null>(2);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRadio((event.currentTarget as HTMLInputElement).value);
@@ -70,6 +72,17 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
           />
         </FormGroup>
       </FormControl>
+
+      <Rating
+        name="simple-controlled"
+        value={rating}
+        precision={0.5}
+        onChange={(event, newRating) => {
+          setRating(newRating);
+        }}
+        className="mx-auto my-1"
+      />
+
       <Button
         variant="contained"
         className="w-100"
