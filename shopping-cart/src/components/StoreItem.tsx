@@ -16,42 +16,51 @@ import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-type StoreItemProps = {
+export type StoreItemProps = {
   id: number;
   price: number;
-  name: string;
-  img_url: string;
+  title: string;
+  image: string;
+  rating: { rate: number; count: number };
+  description: string;
 };
 
-const StoreItem = ({ id, name, price, img_url }: StoreItemProps) => {
+const StoreItem = ({
+  id,
+  title,
+  price,
+  image,
+  rating,
+  description,
+}: StoreItemProps) => {
   const [favourite, setFavourite] = useState(false);
   const count = 0;
-
-  console.log("favourite :>> ", favourite);
 
   return (
     <Card elevation={3}>
       <CardMedia
         component="img"
         height="200"
-        image={img_url}
+        image={image}
         alt="product thumbnail"
       />
       <CardContent className="d-flex align-items-baseline justify-content-between">
-        <Typography variant="h6" color="text.primary">
-          {name}
+        <Typography variant="body1" color="text.primary">
+          {title}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" className="ms-2">
           {formatCurrency(price)}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardContent>
         <Checkbox
           icon={<FavoriteBorder />}
           checkedIcon={<Favorite sx={{ color: red[500] }} />}
           value={favourite}
           onChange={() => setFavourite(!favourite)}
         />
+      </CardContent>
+      <CardActions disableSpacing>
         {count === 0 ? (
           <Button
             variant="contained"

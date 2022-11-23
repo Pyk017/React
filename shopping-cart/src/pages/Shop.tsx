@@ -2,15 +2,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import FilterProducts from "../components/FilterProducts";
 import Store from "../components/Store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Shop = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(true);
 
   const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
-
-  console.log(isFilterOpen);
-
   return (
     <Container fluid>
       <Row>
