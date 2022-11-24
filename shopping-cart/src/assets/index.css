@@ -9,6 +9,14 @@ body {
   font-family: "Noto Sans JP", sans-serif !important;
 }
 
+.card-title {
+  --max-lines: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}
+
 .shop-btn {
   margin-top: 1rem !important;
   position: absolute !important;
@@ -50,5 +58,10 @@ body {
 
   .filter-container .form-check {
     margin: 2rem 0;
+  }
+
+  .__card {
+    max-height: 25rem;
+    min-height: 25rem;
   }
 }

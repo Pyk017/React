@@ -1,4 +1,3 @@
-import storeItems from "../data/items.json";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import StoreItem, { StoreItemProps } from "./StoreItem";
@@ -7,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import FilterAltOffOutlinedIcon from "@mui/icons-material/FilterAltOffOutlined";
 import IconButton from "@mui/material/IconButton";
-import { useState, useEffect } from "react";
+import useFetch from "../hooks/useFetch";
 
 type StoreProps = {
   isFilterOpen: boolean;
@@ -15,38 +14,9 @@ type StoreProps = {
 };
 
 const Store = ({ isFilterOpen, toggleFilter }: StoreProps) => {
-  const [products, setProducts] = useState<StoreItemProps[] | null>(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const getProducts = async () => {
-    const res = await fetch("https://fakestoreapi.com/products");
-
-    if (!res.ok) {
-      const message = `An error has occured: ${res.status}`;
-      throw new Error(message);
-    }
-
-    const response = await res.json();
-    return response;
-  };
-
-  useEffect(() => {
-    getProducts()
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-        setError(null);
-      })
-      .catch((err) => {
-        console.log(err);
-        setProducts(null);
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { loading, error, products } = useFetch(
+    "https://fakestoreapi.com/products"
+  );
 
   return (
     <Col sm={9} className="product-container py-3">
@@ -56,7 +26,11 @@ const Store = ({ isFilterOpen, toggleFilter }: StoreProps) => {
         alignItems="baseline"
         spacing={2}
       >
-        <Typography variant="h3" gutterBottom>
+        <Typography
+          variant="h3"
+          gutterBottom
+          sx={{ fontFamily: '"Noto Sans JP", sans-serif !important' }}
+        >
           Store
         </Typography>
         <IconButton

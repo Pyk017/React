@@ -9,17 +9,31 @@ import Checkbox from "@mui/material/Checkbox";
 import { blue } from "@mui/material/colors";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 import { useState } from "react";
+import roundOff from "../utils/formatCurrency";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
 };
 
+const StyledRating = styled(Rating)({
+  "& .MuiRating-icon": {
+    color: "#fff",
+  },
+
+  "& .MuiRating-iconHover": {
+    color: "#faaf00",
+  },
+});
+
 const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
   const [includeStock, setIncludeStock] = useState(false);
   const [fastDelivery, setFastDelivery] = useState(false);
-  const [rating, setRating] = useState<number | null>(2);
+  const [rating, setRating] = useState<number>(2);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRadio((event.currentTarget as HTMLInputElement).value);
@@ -73,15 +87,24 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
         </FormGroup>
       </FormControl>
 
-      <Rating
-        name="simple-controlled"
-        value={rating}
-        precision={0.5}
-        onChange={(event, newRating) => {
-          setRating(newRating);
-        }}
-        className="mx-auto my-1"
-      />
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        className="mb-2"
+      >
+        <Typography gutterBottom variant="body1">
+          Rating :{" "}
+        </Typography>
+        <StyledRating
+          name="simple-controlled"
+          value={+roundOff(rating)}
+          onChange={(event, newRating) => {
+            setRating(+roundOff(newRating || 0));
+          }}
+          className="mx-auto my-1"
+        />
+      </Stack>
 
       <Button
         variant="contained"

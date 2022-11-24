@@ -15,6 +15,8 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import Rating from "@mui/material/Rating";
+import { roundOff } from "../utils/formatCurrency";
 
 export type StoreItemProps = {
   id: number;
@@ -37,34 +39,51 @@ const StoreItem = ({
   const count = 0;
 
   return (
-    <Card elevation={3}>
+    <Card elevation={3} className="__card">
       <CardMedia
         component="img"
         height="200"
         image={image}
         alt="product thumbnail"
       />
-      <CardContent className="d-flex align-items-baseline justify-content-between">
-        <Typography variant="body1" color="text.primary">
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary" className="ms-2">
-          {formatCurrency(price)}
-        </Typography>
-      </CardContent>
       <CardContent>
-        <Checkbox
-          icon={<FavoriteBorder />}
-          checkedIcon={<Favorite sx={{ color: red[500] }} />}
-          value={favourite}
-          onChange={() => setFavourite(!favourite)}
-        />
+        <Stack
+          className="d-flex align-items-baseline justify-content-between"
+          direction="row"
+        >
+          <Typography variant="h6" color="text.primary" className="card-title">
+            {title}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            className="ms-2"
+          >
+            {formatCurrency(price)}
+          </Typography>
+        </Stack>
+
+        <Stack
+          direction="row"
+          className="align-items-center justify-content-between"
+        >
+          <Checkbox
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite sx={{ color: red[500] }} />}
+            value={favourite}
+            onChange={() => setFavourite(!favourite)}
+          />
+          <Rating name="read-only" value={roundOff(rating.rate)} readOnly />
+          <Button variant="text" size="small" color="primary">
+            View More
+          </Button>
+        </Stack>
       </CardContent>
       <CardActions disableSpacing>
         {count === 0 ? (
           <Button
             variant="contained"
-            className="w-100 mx-3"
+            className="w-100 mx-3 mb-2"
             startIcon={<AddShoppingCartIcon />}
           >
             Add to Cart
@@ -74,7 +93,7 @@ const StoreItem = ({
             direction="row"
             spacing={2}
             divider={<Divider orientation="vertical" flexItem />}
-            className="align-items-center justify-content-center w-100"
+            className="align-items-center justify-content-center w-100 mb-2"
           >
             <Button variant="contained" size="small">
               <AddIcon />
