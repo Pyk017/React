@@ -7,8 +7,14 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import { cyan } from "@mui/material/colors";
 import Button from "@mui/material/Button";
+import {
+  useShoppingContext,
+  ShoppingCartContextType,
+} from "../context/ShoppingCartContext";
 
 const Navbar = () => {
+  const { cartQuantity } = useShoppingContext() as ShoppingCartContextType;
+
   return (
     <NavbarBs bg="primary" variant="dark" sticky="top" expand="sm">
       <Container fluid="md">
@@ -37,8 +43,9 @@ const Navbar = () => {
                 Search
               </Button>
             </Form>
+
             <IconButton size="large" sx={{ color: cyan[50] }}>
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={cartQuantity} color="error">
                 <ShoppingCartIcon fontSize="inherit" />
               </Badge>
             </IconButton>

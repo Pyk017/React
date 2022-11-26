@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import roundOff from "../utils/formatCurrency";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
@@ -33,6 +35,7 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
   const [includeStock, setIncludeStock] = useState(false);
   const [fastDelivery, setFastDelivery] = useState(false);
+  const [favourite, setFavourite] = useState(false);
   const [rating, setRating] = useState<number>(2);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +86,17 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
               />
             }
             label="Fast Delivery Only"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                icon={<FavoriteBorder sx={{ color: blue[500] }} />}
+                checkedIcon={<Favorite sx={{ color: blue[500] }} />}
+                value={favourite}
+                onChange={() => setFavourite(!favourite)}
+              />
+            }
+            label="Favourites"
           />
         </FormGroup>
       </FormControl>

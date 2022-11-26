@@ -10,6 +10,7 @@ export type ItemType = {
   description: string;
   title: string;
   quantity: number;
+  isItemFavourite: boolean;
 };
 
 export type ShoppingCartContextType = {
@@ -22,6 +23,8 @@ export type ShoppingCartContextType = {
   removeFromCart: (id: number) => void;
   openCart: () => void;
   closeCart: () => void;
+  getItemFavouritism: (id: number) => boolean;
+  setItemFavouritism: (id: number) => void;
 };
 
 type ShoppingCartProviderProps = {
@@ -43,10 +46,13 @@ const ShoppingCartContextProvider = ({
     []
   );
 
-  const cartQuantity = cartItems.reduce(
-    (prevCount: number, item: ItemType) => item.quantity + prevCount,
-    0
-  );
+  const cartQuantity =
+    cartItems.length > 0
+      ? cartItems?.reduce(
+          (prevCount: number, item: ItemType) => item.quantity + prevCount,
+          0
+        )
+      : 0;
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
@@ -65,7 +71,15 @@ const ShoppingCartContextProvider = ({
             : __item
         );
       } else {
-        return [...currentItems, { ...item, quantity: 1 }];
+        return [
+          ...currentItems,
+          {
+            ...item,
+            quantity: 1,
+            isItemFavourite: false,
+            rating: item.rating.rate,
+          },
+        ];
       }
     });
   };
@@ -93,6 +107,20 @@ const ShoppingCartContextProvider = ({
     );
   };
 
+  const getItemFavouritism = (id: number) => {
+    return cartItems.find((item: ItemType) => item.id === id)?.isItemFavourite;
+  };
+
+  const setItemFavouritism = (id: number) => {
+    setCartItems((currentItems: ItemType[]) => {
+      return currentItems.map((item: ItemType) =>
+        item.id === id
+          ? { ...item, isItemFavourite: !item.isItemFavourite }
+          : item
+      );
+    });
+  };
+
   return (
     <shoppingCartContext.Provider
       value={
@@ -106,6 +134,8 @@ const ShoppingCartContextProvider = ({
           removeFromCart,
           openCart,
           closeCart,
+          getItemFavouritism,
+          setItemFavouritism,
         } as ShoppingCartContextType
       }
     >
