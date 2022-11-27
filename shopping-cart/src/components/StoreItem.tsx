@@ -22,8 +22,7 @@ import {
   ShoppingCartContextType,
 } from "../context/ShoppingCartContext";
 import ItemDialog from "./ItemDialog";
-
-import SnackBar from "./Snackbar";
+import { useSnackbar } from "notistack";
 
 export type StoreItemProps = {
   id: number;
@@ -49,10 +48,11 @@ const StoreItem = (_item: StoreItemProps) => {
   const count = getItemQuantity(id);
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleDialogClose = () => setDialogOpen(false);
   const handleDialogOpen = () => setDialogOpen(true);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <>
@@ -95,8 +95,8 @@ const StoreItem = (_item: StoreItemProps) => {
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: red[500] }} />}
               value={favourite}
-              defaultChecked={favourite}
-              onChange={() => setItemFavouritism(id)}
+              defaultChecked={false}
+              onChange={() => setItemFavouritism(_item)}
             />
             <Rating name="read-only" value={roundOff(rating.rate)} readOnly />
             <Button
@@ -117,7 +117,9 @@ const StoreItem = (_item: StoreItemProps) => {
               startIcon={<AddShoppingCartIcon />}
               onClick={() => {
                 increaseCartQuantity(_item);
-                setSnackbarOpen(true);
+                enqueueSnackbar("Item added to the Cart!", {
+                  variant: "success",
+                });
               }}
             >
               Add to Cart
@@ -144,7 +146,10 @@ const StoreItem = (_item: StoreItemProps) => {
                 size="medium"
                 onClick={() => {
                   decreaseCartQuantity(id);
-                  setSnackbarOpen(true);
+                  if (count === 1)
+                    enqueueSnackbar("Item removed from the cart!", {
+                      variant: "error",
+                    });
                 }}
               >
                 <RemoveIcon />
@@ -157,14 +162,6 @@ const StoreItem = (_item: StoreItemProps) => {
         open={dialogOpen}
         handleDialogClose={handleDialogClose}
         _item={_item}
-      />
-      <SnackBar
-        open={snackbarOpen}
-        setOpen={setSnackbarOpen}
-        flag={count > 0 ? true : false}
-        description={
-          count > 0 ? "Item added to the Cart" : "Item removed from the Cart!"
-        }
       />
     </>
   );

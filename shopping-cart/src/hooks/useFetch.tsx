@@ -22,7 +22,6 @@ const useFetch = (url: string) => {
   useEffect(() => {
     getProducts()
       .then((data) => {
-        console.log(data);
         setProducts(data);
         setError(null);
       })

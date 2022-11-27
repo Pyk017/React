@@ -25,7 +25,7 @@ export type ShoppingCartContextType = {
   openCart: () => void;
   closeCart: () => void;
   getItemFavouritism: (id: number) => boolean;
-  setItemFavouritism: (id: number) => void;
+  setItemFavouritism: (item: StoreItemProps) => void;
   emptyCart: () => void;
 };
 
@@ -88,14 +88,17 @@ const ShoppingCartContextProvider = ({
 
   const decreaseCartQuantity = (id: number) => {
     setCartItems((currentItems: ItemType[]) => {
-      let quantity = currentItems.find(
-        (item: ItemType) => item.id === id
-      )?.quantity;
-      if (quantity !== 1) {
+      let foundItem = currentItems.find((item: ItemType) => item.id === id);
+
+      if (foundItem?.quantity !== 1) {
         return currentItems.map((__item: ItemType) =>
           __item.id === id
             ? { ...__item, quantity: __item.quantity - 1 }
             : __item
+        );
+      } else if (foundItem?.quantity === 1 && foundItem?.isItemFavourite) {
+        return currentItems.map((__item: ItemType) =>
+          __item.id === id ? { ...__item, quantity: 0 } : __item
         );
       } else {
         return currentItems.filter((__it: ItemType) => __it.id !== id);
@@ -110,16 +113,37 @@ const ShoppingCartContextProvider = ({
   };
 
   const getItemFavouritism = (id: number) => {
-    return cartItems.find((item: ItemType) => item.id === id)?.isItemFavourite;
+    return (
+      cartItems.find((item: ItemType) => item.id === id)?.isItemFavourite ||
+      false
+    );
   };
 
-  const setItemFavouritism = (id: number) => {
+  const setItemFavouritism = (item: StoreItemProps) => {
     setCartItems((currentItems: ItemType[]) => {
-      return currentItems.map((item: ItemType) =>
-        item.id === id
-          ? { ...item, isItemFavourite: !item.isItemFavourite }
-          : item
-      );
+      if (currentItems.length > 0) {
+        let foundItem = currentItems.find((i: ItemType) => i.id === item.id);
+
+        if (foundItem?.quantity === 0 && foundItem?.isItemFavourite) {
+          return currentItems.filter((_i: ItemType) => _i.id !== item.id);
+        } else {
+          return currentItems.map((_i: ItemType) =>
+            item.id === _i.id
+              ? { ..._i, isItemFavourite: !_i.isItemFavourite }
+              : _i
+          );
+        }
+      } else {
+        return [
+          ...currentItems,
+          {
+            ...item,
+            isItemFavourite: true,
+            quantity: 0,
+            rating: item.rating.rate,
+          },
+        ];
+      }
     });
   };
 
