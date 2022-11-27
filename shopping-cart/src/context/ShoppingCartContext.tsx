@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, ReactNode } from "react";
+import ShoppingCartSideBar from "../components/ShoppingCartSidebar";
 import { StoreItemProps } from "../components/StoreItem";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -25,6 +26,7 @@ export type ShoppingCartContextType = {
   closeCart: () => void;
   getItemFavouritism: (id: number) => boolean;
   setItemFavouritism: (id: number) => void;
+  emptyCart: () => void;
 };
 
 type ShoppingCartProviderProps = {
@@ -121,6 +123,8 @@ const ShoppingCartContextProvider = ({
     });
   };
 
+  const emptyCart = () => setCartItems([]);
+
   return (
     <shoppingCartContext.Provider
       value={
@@ -136,10 +140,12 @@ const ShoppingCartContextProvider = ({
           closeCart,
           getItemFavouritism,
           setItemFavouritism,
+          emptyCart,
         } as ShoppingCartContextType
       }
     >
       {children}
+      <ShoppingCartSideBar isCartOpen={isCartOpen} />
     </shoppingCartContext.Provider>
   );
 };

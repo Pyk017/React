@@ -13,7 +13,8 @@ import {
 } from "../context/ShoppingCartContext";
 
 const Navbar = () => {
-  const { cartQuantity } = useShoppingContext() as ShoppingCartContextType;
+  const { cartQuantity, openCart } =
+    useShoppingContext() as ShoppingCartContextType;
 
   return (
     <NavbarBs bg="primary" variant="dark" sticky="top" expand="sm">
@@ -44,7 +45,11 @@ const Navbar = () => {
               </Button>
             </Form>
 
-            <IconButton size="large" sx={{ color: cyan[50] }}>
+            <IconButton
+              size="large"
+              sx={{ color: cyan[50] }}
+              onClick={openCart}
+            >
               <Badge badgeContent={cartQuantity} color="error">
                 <ShoppingCartIcon fontSize="inherit" />
               </Badge>

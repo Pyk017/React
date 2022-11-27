@@ -23,6 +23,8 @@ import {
 } from "../context/ShoppingCartContext";
 import ItemDialog from "./ItemDialog";
 
+import SnackBar from "./Snackbar";
+
 export type StoreItemProps = {
   id: number;
   price: number;
@@ -47,6 +49,7 @@ const StoreItem = (_item: StoreItemProps) => {
   const count = getItemQuantity(id);
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleDialogClose = () => setDialogOpen(false);
   const handleDialogOpen = () => setDialogOpen(true);
@@ -112,7 +115,10 @@ const StoreItem = (_item: StoreItemProps) => {
               variant="contained"
               className="w-100 mx-3 mb-2"
               startIcon={<AddShoppingCartIcon />}
-              onClick={() => increaseCartQuantity(_item)}
+              onClick={() => {
+                increaseCartQuantity(_item);
+                setSnackbarOpen(true);
+              }}
             >
               Add to Cart
             </Button>
@@ -136,7 +142,10 @@ const StoreItem = (_item: StoreItemProps) => {
               <Button
                 variant="contained"
                 size="medium"
-                onClick={() => decreaseCartQuantity(id)}
+                onClick={() => {
+                  decreaseCartQuantity(id);
+                  setSnackbarOpen(true);
+                }}
               >
                 <RemoveIcon />
               </Button>
@@ -148,6 +157,14 @@ const StoreItem = (_item: StoreItemProps) => {
         open={dialogOpen}
         handleDialogClose={handleDialogClose}
         _item={_item}
+      />
+      <SnackBar
+        open={snackbarOpen}
+        setOpen={setSnackbarOpen}
+        flag={count > 0 ? true : false}
+        description={
+          count > 0 ? "Item added to the Cart" : "Item removed from the Cart!"
+        }
       />
     </>
   );
