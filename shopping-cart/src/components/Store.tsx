@@ -6,7 +6,11 @@ import Stack from "@mui/material/Stack";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import FilterAltOffOutlinedIcon from "@mui/icons-material/FilterAltOffOutlined";
 import IconButton from "@mui/material/IconButton";
-import useFetch from "../hooks/useFetch";
+
+import {
+  useProductContext,
+  ProductContextProps,
+} from "../context/ProductsContext";
 
 type StoreProps = {
   isFilterOpen: boolean;
@@ -14,9 +18,8 @@ type StoreProps = {
 };
 
 const Store = ({ isFilterOpen, toggleFilter }: StoreProps) => {
-  const { loading, error, products } = useFetch(
-    "https://fakestoreapi.com/products"
-  );
+  const { loading, error, products } =
+    useProductContext() as ProductContextProps;
 
   return (
     <Col sm={9} className="product-container py-3">

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import useLocalStorage from "./useLocalStorage";
 import { StoreItemProps } from "../components/StoreItem";
 
 const useFetch = (url: string) => {

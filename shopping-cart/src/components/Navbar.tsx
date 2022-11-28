@@ -11,10 +11,20 @@ import {
   useShoppingContext,
   ShoppingCartContextType,
 } from "../context/ShoppingCartContext";
+import { useRef } from "react";
+
+import {
+  useProductContext,
+  ProductContextProps,
+} from "../context/ProductsContext";
 
 const Navbar = () => {
+  const searchRef = useRef<HTMLInputElement | null>(null);
   const { cartQuantity, openCart } =
     useShoppingContext() as ShoppingCartContextType;
+
+  const { searchValue, setSearchValue } =
+    useProductContext() as ProductContextProps;
 
   return (
     <NavbarBs bg="primary" variant="dark" sticky="top" expand="sm">
@@ -34,11 +44,19 @@ const Navbar = () => {
               </Nav.Link>
             </div>
 
-            <Form className="d-flex py-2">
+            <Form
+              className="d-flex py-2"
+              onSubmit={() => {
+                if (searchRef.current) setSearchValue(searchRef.current.value);
+              }}
+            >
               <Form.Control
                 type="search"
+                ref={searchRef}
                 placeholder="Search..."
                 className="me-2 w-100"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.currentTarget.value)}
               />
               <Button variant="contained" color="success">
                 Search
