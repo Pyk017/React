@@ -46,7 +46,8 @@ const Navbar = () => {
 
             <Form
               className="d-flex py-2"
-              onSubmit={() => {
+              onSubmit={(e) => {
+                e.preventDefault();
                 if (searchRef.current) setSearchValue(searchRef.current.value);
               }}
             >

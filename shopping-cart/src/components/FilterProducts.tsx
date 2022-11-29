@@ -16,6 +16,11 @@ import { useState } from "react";
 import roundOff from "../utils/formatCurrency";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import {
+  useProductContext,
+  ProductContextProps,
+  ACTIONS,
+} from "../context/ProductsContext";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
@@ -38,7 +43,14 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
   const [favourite, setFavourite] = useState(false);
   const [rating, setRating] = useState<number>(2);
 
+  const { dispatch } = useProductContext() as ProductContextProps;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("event.currentTarget.value :>> ", event.currentTarget.value);
+    event.currentTarget.value === "ascending"
+      ? dispatch({ type: ACTIONS.ASCENDING })
+      : dispatch({ type: ACTIONS.DESCENDING });
+
     setRadio((event.currentTarget as HTMLInputElement).value);
   };
 
