@@ -13,17 +13,13 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
-import roundOff from "../utils/formatCurrency";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
-import {
-  useProductContext,
-  ProductContextProps,
-  ACTIONS,
-} from "../context/ProductsContext";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
+  filterParam: string | number | null;
+  changeFilter: (newParam: string | number | null) => void;
 };
 
 const StyledRating = styled(Rating)({
@@ -34,23 +30,30 @@ const StyledRating = styled(Rating)({
   "& .MuiRating-iconHover": {
     color: "#faaf00",
   },
+
+  "& .MuiRating-iconFilled": {
+    color: "#ff6d75",
+  },
 });
 
-const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
+const FilterProducts = ({
+  isFilterOpen,
+  filterParam,
+  changeFilter,
+}: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
   const [includeStock, setIncludeStock] = useState(false);
   const [fastDelivery, setFastDelivery] = useState(false);
   const [favourite, setFavourite] = useState(false);
-  const [rating, setRating] = useState<number>(2);
+  const [rating, setRating] = useState<number | null>(0);
+  // const ratingRef = useRef(0);
+  // const { dispatch } = useProductContext() as ProductContextProps;
 
-  const { dispatch } = useProductContext() as ProductContextProps;
+  // console.log("ratingRef.current :>> ", ratingRef);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("event.currentTarget.value :>> ", event.currentTarget.value);
-    event.currentTarget.value === "ascending"
-      ? dispatch({ type: ACTIONS.ASCENDING })
-      : dispatch({ type: ACTIONS.DESCENDING });
-
+    changeFilter(event.currentTarget.value);
     setRadio((event.currentTarget as HTMLInputElement).value);
   };
 
@@ -103,7 +106,7 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
             control={
               <Checkbox
                 icon={<FavoriteBorder sx={{ color: blue[500] }} />}
-                checkedIcon={<Favorite sx={{ color: blue[500] }} />}
+                checkedIcon={<Favorite sx={{ color: "#ff6d75" }} />}
                 value={favourite}
                 onChange={() => setFavourite(!favourite)}
               />
@@ -124,9 +127,10 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
         </Typography>
         <StyledRating
           name="simple-controlled"
-          value={+roundOff(rating)}
+          value={rating}
           onChange={(event, newRating) => {
-            setRating(+roundOff(newRating || 0));
+            setRating(newRating || 0);
+            changeFilter(newRating || 0);
           }}
           className="mx-auto my-1"
         />
@@ -137,6 +141,11 @@ const FilterProducts = ({ isFilterOpen }: FilterProductsProps) => {
         className="w-100"
         startIcon={<ClearAllIcon />}
         color="error"
+        onClick={() => {
+          changeFilter(null);
+          setRadio("");
+          setRating(0);
+        }}
       >
         Clear all filters
       </Button>

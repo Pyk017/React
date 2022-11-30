@@ -11,15 +11,50 @@ import {
   useProductContext,
   ProductContextProps,
 } from "../context/ProductsContext";
+import { roundOff } from "../utils/formatCurrency";
 
-type StoreProps = {
+interface StoreProps {
   isFilterOpen: boolean;
   toggleFilter: () => void;
+  filterParam: string | number | null;
+}
+
+const ACTIONS = {
+  ASCENDING: "ascending",
+  DESCENDING: "descending",
+  RATING: "rating",
 };
 
-const Store = ({ isFilterOpen, toggleFilter }: StoreProps) => {
-  const { loading, error, products } =
-    useProductContext() as ProductContextProps;
+const Store = ({ isFilterOpen, toggleFilter, filterParam }: StoreProps) => {
+  let { loading, error, products } = useProductContext() as ProductContextProps;
+
+  console.log("filterParam :>> ", filterParam);
+
+  const getFilteredData = (filterParam: string | number | null) => {
+    if (filterParam === null || filterParam === 0) {
+      return products.sort((a, b) => a.id - b.id);
+    }
+
+    if (typeof filterParam === "number") {
+      return products.filter(
+        (item: StoreItemProps) => roundOff(item.rating.rate) === filterParam
+      );
+    }
+
+    switch (filterParam) {
+      case ACTIONS.ASCENDING:
+        return products.sort((a, b) => a.title.localeCompare(b.title));
+
+      case ACTIONS.DESCENDING:
+        return products.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
+    return products;
+  };
+
+  products = getFilteredData(filterParam);
+
+  console.log("products :>> ", products, filterParam);
 
   return (
     <Col sm={9} className="product-container py-3">

@@ -1,11 +1,6 @@
 import { useState, createContext, useContext } from "react";
 import { StoreItemProps } from "../components/StoreItem";
-import { useEffect, useReducer } from "react";
-
-type actionType = {
-  type: string;
-  payload?: any;
-};
+import { useEffect } from "react";
 
 export type ProductContextProps = {
   products: StoreItemProps[];
@@ -13,7 +8,6 @@ export type ProductContextProps = {
   error: string | null;
   searchValue: string;
   setSearchValue: React.Dispatch<string>;
-  dispatch: React.Dispatch<actionType>;
 };
 
 export const productContext = createContext({});
@@ -22,53 +16,18 @@ export const useProductContext = () => {
   return useContext(productContext);
 };
 
-export const ACTIONS = {
-  ADD_DATA: "addData",
-  ASCENDING: "ascending",
-  DESCENDING: "descending",
-};
-
-function reducer(products: StoreItemProps[], action: actionType) {
-  switch (action.type) {
-    case ACTIONS.ADD_DATA:
-      return action.payload;
-    case ACTIONS.ASCENDING:
-      return products?.sort((a, b) => a.title.localeCompare(b.title));
-    case ACTIONS.DESCENDING:
-      return products?.sort((a, b) => b.title.localeCompare(a.title));
-    default:
-      return products;
-  }
-}
-
 const ProductsContextProvider = ({ children }: React.PropsWithChildren) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // const [productItems, setProductItems] = useState<StoreItemProps[]>([]);
-
-  const [productItems, dispatch] = useReducer(reducer, [] as StoreItemProps[]);
-
+  const [productItems, setProductItems] = useState<StoreItemProps[]>([]);
   const [url, setUrl] = useState("https://fakestoreapi.com/products");
   const [searchValue, setSearchValue] = useState<string>("");
-  // const [ascOrder, setAscOrder] = useState(true);
+  const [ascOrder, setAscOrder] = useState(true);
 
   const products = productItems?.filter(
     (item: StoreItemProps) =>
       item.title.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
   );
-  console.log("products :>> ", products);
-
-  // console.log("products :>> ", products);
-
-  // const [productState, dispatch] = useReducer(reducer, products);
-
-  // console.log("productItems :>> ", productItems);
-  // console.log("productState :>> ", productState);
-
-  // if (!ascOrder) {
-  //   products?.sort((a, b) => b.title.localeCompare(a.title));
-  // }
 
   const getProducts = async () => {
     const res = await fetch(url);
@@ -86,14 +45,12 @@ const ProductsContextProvider = ({ children }: React.PropsWithChildren) => {
     console.log("useeffect counting");
     getProducts()
       .then((data) => {
-        // setProductItems(data);
-        dispatch({ type: ACTIONS.ADD_DATA, payload: data });
+        setProductItems(data);
         setError(null);
       })
       .catch((err) => {
         console.log(err);
-        // setProductItems([]);
-        dispatch({ type: ACTIONS.ADD_DATA, payload: [] });
+        setProductItems([]);
         setError(err.message);
       })
       .finally(() => {
@@ -110,8 +67,6 @@ const ProductsContextProvider = ({ children }: React.PropsWithChildren) => {
           products,
           searchValue,
           setSearchValue,
-          // productState,
-          dispatch,
         } as ProductContextProps
       }
     >
