@@ -17,9 +17,6 @@ interface StoreProps {
   isFilterOpen: boolean;
   toggleFilter: () => void;
   filterParam: string | number | null;
-  loading: boolean;
-  error: string | null;
-  products: StoreItemProps[];
 }
 
 const ACTIONS = {
@@ -28,15 +25,8 @@ const ACTIONS = {
   RATING: "rating",
 };
 
-const Store = ({
-  isFilterOpen,
-  toggleFilter,
-  filterParam,
-  loading,
-  error,
-  products,
-}: StoreProps) => {
-  // let { loading, error, products } = useProductContext() as ProductContextProps;
+const Store = ({ isFilterOpen, toggleFilter, filterParam }: StoreProps) => {
+  let { loading, error, products } = useProductContext() as ProductContextProps;
 
   console.log("filterParam :>> ", filterParam);
 

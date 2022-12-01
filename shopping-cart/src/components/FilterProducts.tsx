@@ -18,7 +18,6 @@ import Favorite from "@mui/icons-material/Favorite";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
-  filterParam: string | number | null;
   changeFilter: (newParam: string | number | null) => void;
 };
 
@@ -38,7 +37,6 @@ const StyledRating = styled(Rating)({
 
 const FilterProducts = ({
   isFilterOpen,
-  filterParam,
   changeFilter,
 }: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
@@ -46,10 +44,6 @@ const FilterProducts = ({
   const [fastDelivery, setFastDelivery] = useState(false);
   const [favourite, setFavourite] = useState(false);
   const [rating, setRating] = useState<number | null>(0);
-  // const ratingRef = useRef(0);
-  // const { dispatch } = useProductContext() as ProductContextProps;
-
-  // console.log("ratingRef.current :>> ", ratingRef);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("event.currentTarget.value :>> ", event.currentTarget.value);
