@@ -15,10 +15,11 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import { ACTIONS, fitlerActionType } from "../pages/Shop";
 
 type FilterProductsProps = {
   isFilterOpen: boolean;
-  changeFilter: (newParam: string | number | null) => void;
+  dispatch: React.Dispatch<fitlerActionType>;
 };
 
 const StyledRating = styled(Rating)({
@@ -35,10 +36,7 @@ const StyledRating = styled(Rating)({
   },
 });
 
-const FilterProducts = ({
-  isFilterOpen,
-  changeFilter,
-}: FilterProductsProps) => {
+const FilterProducts = ({ isFilterOpen, dispatch }: FilterProductsProps) => {
   const [radio, setRadio] = useState("");
   const [includeStock, setIncludeStock] = useState(false);
   const [fastDelivery, setFastDelivery] = useState(false);
@@ -46,8 +44,12 @@ const FilterProducts = ({
   const [rating, setRating] = useState<number | null>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("event.currentTarget.value :>> ", event.currentTarget.value);
-    changeFilter(event.currentTarget.value);
+    // console.log("event.currentTarget.value :>> ", event.currentTarget.value);
+
+    event.currentTarget.value === "ascending"
+      ? dispatch({ type: ACTIONS.ASCENDING })
+      : dispatch({ type: ACTIONS.DESCENDING });
+
     setRadio((event.currentTarget as HTMLInputElement).value);
   };
 
@@ -80,18 +82,30 @@ const FilterProducts = ({
             control={
               <Checkbox
                 sx={{ color: blue[500] }}
-                value={includeStock}
-                onChange={(e) => setIncludeStock(e.currentTarget.checked)}
+                checked={includeStock}
+                onChange={(e) => {
+                  setIncludeStock(e.currentTarget.checked);
+                  dispatch({
+                    type: ACTIONS.OUT_STOCK,
+                    payload: e.currentTarget.checked,
+                  });
+                }}
               />
             }
-            label="Include Out of Stock"
+            label="Items Out of Stock"
           />
           <FormControlLabel
             control={
               <Checkbox
                 sx={{ color: blue[500] }}
-                value={fastDelivery}
-                onChange={(e) => setFastDelivery(e.currentTarget.checked)}
+                checked={fastDelivery}
+                onChange={(e) => {
+                  setFastDelivery(e.currentTarget.checked);
+                  dispatch({
+                    type: ACTIONS.FAST_DELIVERY,
+                    payload: e.currentTarget.checked,
+                  });
+                }}
               />
             }
             label="Fast Delivery Only"
@@ -101,8 +115,11 @@ const FilterProducts = ({
               <Checkbox
                 icon={<FavoriteBorder sx={{ color: blue[500] }} />}
                 checkedIcon={<Favorite sx={{ color: "#ff6d75" }} />}
-                value={favourite}
-                onChange={() => setFavourite(!favourite)}
+                checked={favourite}
+                onChange={() => {
+                  setFavourite(!favourite);
+                  dispatch({ type: ACTIONS.FAVOURITES, payload: !favourite });
+                }}
               />
             }
             label="Favourites"
@@ -124,7 +141,7 @@ const FilterProducts = ({
           value={rating}
           onChange={(event, newRating) => {
             setRating(newRating || 0);
-            changeFilter(newRating || 0);
+            dispatch({ type: ACTIONS.RATING, payload: newRating || 0 });
           }}
           className="mx-auto my-1"
         />
@@ -136,9 +153,12 @@ const FilterProducts = ({
         startIcon={<ClearAllIcon />}
         color="error"
         onClick={() => {
-          changeFilter(null);
           setRadio("");
           setRating(0);
+          setIncludeStock(false);
+          setFastDelivery(false);
+          setFavourite(false);
+          dispatch({ type: ACTIONS.CLEAR });
         }}
       >
         Clear all filters

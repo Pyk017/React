@@ -1,6 +1,7 @@
 import { useState, createContext, useContext } from "react";
 import { StoreItemProps } from "../components/StoreItem";
 import { useEffect } from "react";
+import { getRandomEntity } from "../utils/formatCurrency";
 
 export type ProductContextProps = {
   products: StoreItemProps[];
@@ -22,7 +23,6 @@ const ProductsContextProvider = ({ children }: React.PropsWithChildren) => {
   const [productItems, setProductItems] = useState<StoreItemProps[]>([]);
   const [url, setUrl] = useState("https://fakestoreapi.com/products");
   const [searchValue, setSearchValue] = useState<string>("");
-  const [ascOrder, setAscOrder] = useState(true);
 
   const products = productItems?.filter(
     (item: StoreItemProps) =>
@@ -45,7 +45,20 @@ const ProductsContextProvider = ({ children }: React.PropsWithChildren) => {
     console.log("useeffect counting");
     getProducts()
       .then((data) => {
-        setProductItems(data);
+        setProductItems(
+          data
+            .map((d: StoreItemProps) => ({
+              ...d,
+              favourite: false,
+              in_stock: getRandomEntity([true, false]),
+            }))
+            .map((_d: StoreItemProps) => {
+              if (_d.in_stock) {
+                return { ..._d, fast_delivery: getRandomEntity([true, false]) };
+              }
+              return { ..._d, fast_delivery: false };
+            })
+        );
         setError(null);
       })
       .catch((err) => {

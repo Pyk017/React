@@ -23,6 +23,7 @@ import {
 } from "../context/ShoppingCartContext";
 import ItemDialog from "./ItemDialog";
 import { useSnackbar } from "notistack";
+import ErrorIcon from "@mui/icons-material/Error";
 
 export type StoreItemProps = {
   id: number;
@@ -31,6 +32,9 @@ export type StoreItemProps = {
   image: string;
   rating: { rate: number; count: number };
   description: string;
+  favourite: boolean;
+  in_stock: boolean;
+  fast_delivery: boolean;
 };
 
 const StoreItem = (_item: StoreItemProps) => {
@@ -94,8 +98,7 @@ const StoreItem = (_item: StoreItemProps) => {
             <Checkbox
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: red[500] }} />}
-              value={favourite}
-              defaultChecked={false}
+              checked={favourite}
               onChange={() => setItemFavouritism(_item)}
             />
             <Rating name="read-only" value={roundOff(rating.rate)} readOnly />
@@ -114,15 +117,18 @@ const StoreItem = (_item: StoreItemProps) => {
             <Button
               variant="contained"
               className="w-100 mx-3 mb-2"
-              startIcon={<AddShoppingCartIcon />}
+              startIcon={
+                _item.in_stock ? <AddShoppingCartIcon /> : <ErrorIcon />
+              }
               onClick={() => {
                 increaseCartQuantity(_item);
                 enqueueSnackbar("Item added to the Cart!", {
                   variant: "success",
                 });
               }}
+              disabled={!_item.in_stock}
             >
-              Add to Cart
+              {_item.in_stock ? "Add to Cart" : "Out of Stock"}
             </Button>
           ) : (
             <Stack

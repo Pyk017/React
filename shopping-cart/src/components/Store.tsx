@@ -6,55 +6,72 @@ import Stack from "@mui/material/Stack";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import FilterAltOffOutlinedIcon from "@mui/icons-material/FilterAltOffOutlined";
 import IconButton from "@mui/material/IconButton";
-
+import { fitlerStateType } from "../pages/Shop";
 import {
   useProductContext,
   ProductContextProps,
 } from "../context/ProductsContext";
 import { roundOff } from "../utils/formatCurrency";
+import {
+  ItemType,
+  ShoppingCartContextType,
+  useShoppingContext,
+} from "../context/ShoppingCartContext";
 
 interface StoreProps {
   isFilterOpen: boolean;
   toggleFilter: () => void;
-  filterParam: string | number | null;
+  filteredParam: fitlerStateType;
 }
 
-const ACTIONS = {
-  ASCENDING: "ascending",
-  DESCENDING: "descending",
-  RATING: "rating",
-};
-
-const Store = ({ isFilterOpen, toggleFilter, filterParam }: StoreProps) => {
+const Store = ({ isFilterOpen, toggleFilter, filteredParam }: StoreProps) => {
   let { loading, error, products } = useProductContext() as ProductContextProps;
+  const { cartItems } = useShoppingContext() as ShoppingCartContextType;
 
-  console.log("filterParam :>> ", filterParam);
-
-  const getFilteredData = (filterParam: string | number | null) => {
-    if (filterParam === null || filterParam === 0) {
-      return products.sort((a, b) => a.id - b.id);
+  const getFilteredData = () => {
+    if (Object.keys(filteredParam).length === 0) {
+      products = products.sort((a, b) => a.id - b.id);
     }
 
-    if (typeof filterParam === "number") {
+    if (filteredParam.toggleOrder === true) {
+      products.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    if (filteredParam.toggleOrder === false) {
+      products.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
+    if (filteredParam.fastDelivery) {
+      products = products.filter((item: StoreItemProps) => item.fast_delivery);
+    }
+
+    if (filteredParam.favourite === true) {
+      products = products.filter((item: StoreItemProps) => {
+        return (
+          cartItems.find((_i: ItemType) => _i.id === item.id)?.favourite ||
+          false
+        );
+      });
+    }
+
+    if (filteredParam.rating) {
       return products.filter(
-        (item: StoreItemProps) => roundOff(item.rating.rate) === filterParam
+        (item: StoreItemProps) =>
+          roundOff(item.rating.rate) === filteredParam.rating
       );
     }
 
-    switch (filterParam) {
-      case ACTIONS.ASCENDING:
-        return products.sort((a, b) => a.title.localeCompare(b.title));
-
-      case ACTIONS.DESCENDING:
-        return products.sort((a, b) => b.title.localeCompare(a.title));
+    if (filteredParam.outOfStock) {
+      return products;
     }
 
-    return products;
+    return products.filter((item: StoreItemProps) => item.in_stock);
   };
 
-  products = getFilteredData(filterParam);
+  products = getFilteredData();
 
-  console.log("products :>> ", products, filterParam);
+  console.log("products :>> ", products, filteredParam);
+  console.log("cartItems :>> ", cartItems);
 
   return (
     <Col sm={9} className="product-container py-3">

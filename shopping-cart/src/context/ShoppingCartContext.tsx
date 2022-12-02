@@ -12,6 +12,7 @@ export type ItemType = {
   title: string;
   quantity: number;
   isItemFavourite: boolean;
+  favourite: boolean;
 };
 
 export type ShoppingCartContextType = {
@@ -78,7 +79,7 @@ const ShoppingCartContextProvider = ({
           {
             ...item,
             quantity: 1,
-            isItemFavourite: false,
+
             rating: item.rating.rate,
           },
         ];
@@ -96,7 +97,7 @@ const ShoppingCartContextProvider = ({
             ? { ...__item, quantity: __item.quantity - 1 }
             : __item
         );
-      } else if (foundItem?.quantity === 1 && foundItem?.isItemFavourite) {
+      } else if (foundItem?.quantity === 1 && foundItem?.favourite) {
         return currentItems.map((__item: ItemType) =>
           __item.id === id ? { ...__item, quantity: 0 } : __item
         );
@@ -114,8 +115,7 @@ const ShoppingCartContextProvider = ({
 
   const getItemFavouritism = (id: number) => {
     return (
-      cartItems.find((item: ItemType) => item.id === id)?.isItemFavourite ||
-      false
+      cartItems.find((item: ItemType) => item.id === id)?.favourite || false
     );
   };
 
@@ -124,13 +124,18 @@ const ShoppingCartContextProvider = ({
       if (currentItems.length > 0) {
         let foundItem = currentItems.find((i: ItemType) => i.id === item.id);
 
-        if (foundItem?.quantity === 0 && foundItem?.isItemFavourite) {
+        if (!foundItem) {
+          return [
+            ...currentItems,
+            { ...item, favourite: true, quantity: 0, rating: item.rating.rate },
+          ];
+        }
+
+        if (foundItem?.quantity === 0 && foundItem?.favourite) {
           return currentItems.filter((_i: ItemType) => _i.id !== item.id);
         } else {
           return currentItems.map((_i: ItemType) =>
-            item.id === _i.id
-              ? { ..._i, isItemFavourite: !_i.isItemFavourite }
-              : _i
+            item.id === _i.id ? { ..._i, favourite: !_i.favourite } : _i
           );
         }
       } else {
@@ -138,7 +143,7 @@ const ShoppingCartContextProvider = ({
           ...currentItems,
           {
             ...item,
-            isItemFavourite: true,
+            favourite: true,
             quantity: 0,
             rating: item.rating.rate,
           },
