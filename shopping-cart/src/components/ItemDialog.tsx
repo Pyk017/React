@@ -26,7 +26,7 @@ const ItemDialog = ({ _item, open, handleDialogClose }: any) => {
   const favourite = getItemFavouritism(id);
 
   return (
-    <Dialog open={open} onClose={handleDialogClose}>
+    <Dialog open={open} onClose={handleDialogClose} maxWidth="sm">
       <DialogContent>
         <Card
           elevation={3}
@@ -59,13 +59,17 @@ const ItemDialog = ({ _item, open, handleDialogClose }: any) => {
               </Typography>
             </Stack>
 
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              className="card-description"
+            >
               {description}
             </Typography>
 
             <Stack
               direction="row"
-              className="align-items-center justify-content-between align-items-center"
+              className="align-items-center justify-content-between align-items-center my-2"
             >
               <Checkbox
                 icon={<FavoriteBorder />}

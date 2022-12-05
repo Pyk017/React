@@ -17,6 +17,14 @@ body {
   -webkit-line-clamp: var(--max-lines);
 }
 
+.card-description {
+  --max-lines: 3;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}
+
 .shop-btn {
   margin-top: 1rem !important;
   position: absolute !important;

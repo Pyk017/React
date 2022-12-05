@@ -17,6 +17,7 @@ import {
   ShoppingCartContextType,
   useShoppingContext,
 } from "../context/ShoppingCartContext";
+import SkeletonProduct from "./SkeletonProduct";
 
 interface StoreProps {
   isFilterOpen: boolean;
@@ -55,7 +56,7 @@ const Store = ({ isFilterOpen, toggleFilter, filteredParam }: StoreProps) => {
     }
 
     if (filteredParam.rating) {
-      return products.filter(
+      products = products.filter(
         (item: StoreItemProps) =>
           roundOff(item.rating.rate) === filteredParam.rating
       );
@@ -70,8 +71,9 @@ const Store = ({ isFilterOpen, toggleFilter, filteredParam }: StoreProps) => {
 
   products = getFilteredData();
 
-  console.log("products :>> ", products, filteredParam);
-  console.log("cartItems :>> ", cartItems);
+  // console.log("products :>> ", products, filteredParam);
+  // console.log("products.length :>> ", products.length === 0);
+  // console.log("cartItems :>> ", cartItems);
 
   return (
     <Col sm={9} className="product-container py-3">
@@ -101,9 +103,17 @@ const Store = ({ isFilterOpen, toggleFilter, filteredParam }: StoreProps) => {
           )}
         </IconButton>
       </Stack>
-      {loading && <h1>Loading ...</h1>}
+      {loading && (
+        <Row xs={1} md={2} lg={3} className="g-3">
+          {Array.from(new Array(9)).map((_, idx) => (
+            <Col key={idx}>
+              <SkeletonProduct />
+            </Col>
+          ))}
+        </Row>
+      )}
       {error && <h1>Some error occured!</h1>}
-      {products && (
+      {products.length !== 0 ? (
         <Row xs={1} md={2} lg={3} className="g-3">
           {products.map((item: StoreItemProps) => (
             <Col key={item.id}>
@@ -111,6 +121,23 @@ const Store = ({ isFilterOpen, toggleFilter, filteredParam }: StoreProps) => {
             </Col>
           ))}
         </Row>
+      ) : null}
+      {!error && !loading && products.length === 0 && (
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
+          <img src="./images/empty-trash.png" alt="empty icon" />
+          <Typography
+            variant="h4"
+            gutterBottom
+            sx={{ fontFamily: '"Noto Sans JP", sans-serif !important' }}
+          >
+            Oops! No Items found.
+          </Typography>
+        </Stack>
       )}
     </Col>
   );
