@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ToolTip from "../ToolTip";
+import { useThemeContext, themeContextType } from "../contexts/ThemeContext";
 
 const Footer = ({ tasks, page }: any) => {
   const navigate = useNavigate();
@@ -12,14 +13,20 @@ const Footer = ({ tasks, page }: any) => {
     `page-completed px-3 my-3`,
   ];
 
-  if (page === "all") pageAllClasses += " active-page";
+  if (page === "all") pageAllClasses += " active-page text-black";
 
-  if (page === "active") pageActiveClasses += " active-page";
+  if (page === "active") pageActiveClasses += " active-page text-black";
 
-  if (page === "completed") pageCompletedClasses += " active-page";
+  if (page === "completed") pageCompletedClasses += " active-page text-black";
+
+  const { theme } = useThemeContext() as themeContextType;
+
+  const classes =
+    "container-footer d-flex justify-content-between align-items-center " +
+    (theme.isLightTheme ? " bg-gray text-black" : " bg-dark text-white");
 
   return (
-    <div className="container-footer d-flex justify-content-between bg-gray align-items-center">
+    <div className={classes}>
       <div className="left-items d-flex">
         <div className="add-new-task px-3 my-3">
           <ToolTip

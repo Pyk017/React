@@ -5,16 +5,21 @@ import Footer from "../components/Footer";
 import NoTask from "../components/NoTask";
 
 import SkeletonPage from "../SkeletonPage";
+import { useThemeContext, themeContextType } from "../contexts/ThemeContext";
 
 const ActiveTasks = ({ tasks, updateTasks, deleteTasks }: any) => {
   const [loading, setLoading] = useState(true);
+
+  const { theme } = useThemeContext() as themeContextType;
+  const classes =
+    `container-box py-3 px-4` + (theme.isLightTheme ? " bg-white" : " bg-dark");
 
   setTimeout(() => {
     setLoading(false);
   }, 500);
 
   return (
-    <div className="container-box py-3 px-4 bg-white">
+    <div className={classes}>
       <div className="container-header">
         <Heading header={"ACTIVE TASKS"} />
 

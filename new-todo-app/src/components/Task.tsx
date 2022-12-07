@@ -1,3 +1,4 @@
+import { useThemeContext, themeContextType } from "../contexts/ThemeContext";
 import ToolTip from "../ToolTip";
 
 const Task = ({ task, updateTasks, status, deleteTasks }: any) => {
@@ -5,8 +6,13 @@ const Task = ({ task, updateTasks, status, deleteTasks }: any) => {
 
   if (!status) tippyCheckContent = "Mark Done";
 
+  const { theme } = useThemeContext() as themeContextType;
+  const classes = theme.isLightTheme
+    ? "list-group-item bg-light text-black"
+    : "list-group-item bg-dark text-white";
+
   return (
-    <li className="list-group-item">
+    <li className={classes}>
       <div className="form-check">
         <ToolTip
           message={tippyCheckContent}

@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import NoTask from "../components/NoTask";
 
 import SkeletonPage from "../SkeletonPage";
+import { useThemeContext, themeContextType } from "../contexts/ThemeContext";
 
 const SearchPage = ({ tasks, updateTasks }: any) => {
   const [searchTask, setSearchTask] = useState(tasks);
@@ -30,8 +31,12 @@ const SearchPage = ({ tasks, updateTasks }: any) => {
     );
   };
 
+  const { theme } = useThemeContext() as themeContextType;
+  const classes =
+    `container-box py-3 px-4` + (theme.isLightTheme ? " bg-white" : " bg-dark");
+
   return (
-    <div className="container-box py-3 px-4 bg-white">
+    <div className={classes}>
       <div className="container-header">
         <Heading header={"SEARCH TASKS"} />
         <InputBox

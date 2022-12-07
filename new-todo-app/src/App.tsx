@@ -10,6 +10,7 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/material.css";
 import "tippy.js/animations/shift-away.css";
 import "tippy.js/animations/scale.css";
+import { useThemeContext, themeContextType } from "./contexts/ThemeContext";
 
 function App() {
   const setLocalStorage = (tasks: any) => {
@@ -96,8 +97,15 @@ function App() {
     setLocalStorage(tasks);
   }, [tasks]);
 
+  const { theme } = useThemeContext() as themeContextType;
+
+  const currentTheme = theme.isLightTheme ? theme.light : theme.dark;
+
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ background: currentTheme.bg, color: currentTheme.syntax }}
+    >
       <div className="container pt-5">
         <BrowserRouter>
           <Routes>
