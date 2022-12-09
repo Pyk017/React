@@ -24,7 +24,7 @@ export const useThemeContext = () => useContext(ThemeContext);
 const ThemeContextProvider = ({ children }: React.PropsWithChildren) => {
   const [theme, setTheme] = useState<themeType>({
     light: { bg: "#f5f5f5d8", syntax: "#212529", ui: "#ffffff" },
-    dark: { bg: "#262525", syntax: "#f5f5f5d8", ui: "##565656" },
+    dark: { bg: "#262525", syntax: "#f5f5f5d8", ui: "#c1b8b8" },
     isLightTheme: true,
   });
 
