@@ -11,8 +11,12 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useTheme } from "@mui/material/styles";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ColorModeContext } from "../App";
 
 const drawerWidth = 240;
 const navItems = [
@@ -26,10 +30,23 @@ const navItems = [
     label: "About",
     link: "/about",
   },
+  {
+    id: 3,
+    label: "Help",
+    link: "/help",
+  },
+  {
+    id: 4,
+    label: "Career",
+    link: "/careers",
+  },
 ];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -48,7 +65,8 @@ const Navbar = () => {
               <ListItemButton
                 sx={{
                   textAlign: "center",
-                  color: "#fff",
+                  // color: "#fff",
+                  color: theme.palette.mode === "dark" ? "#fff" : "#000",
                   textDecoration: "none",
                 }}
               >
@@ -57,6 +75,13 @@ const Navbar = () => {
             </ListItem>
           </NavLink>
         ))}
+        <IconButton color="inherit" onClick={colorMode.toggleColorMode}>
+          {theme.palette.mode === "dark" ? (
+            <Brightness4Icon />
+          ) : (
+            <Brightness7Icon />
+          )}
+        </IconButton>
       </List>
     </Box>
   );
@@ -79,14 +104,25 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            JOB-A-ROUTER
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <NavLink key={item.id} to={item.link}>
+              <NavLink
+                key={item.id}
+                to={item.link}
+                style={{ textDecoration: "none" }}
+              >
                 <Button sx={{ color: "#fff" }}>{item.label}</Button>
               </NavLink>
             ))}
+            <IconButton color="inherit" onClick={colorMode.toggleColorMode}>
+              {theme.palette.mode === "dark" ? (
+                <Brightness4Icon />
+              ) : (
+                <Brightness7Icon />
+              )}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
